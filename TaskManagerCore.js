@@ -10,6 +10,8 @@ const CONFIG = {
   HEADERS: ['ID', 'Task', 'Status', 'Priority', 'Created Date', 'Due Date', 'Notes', 'Tags', 'Assignee'],
   STATUS_OPTIONS: ['Pending', 'In Progress', 'Completed', 'Blocked'],
   PRIORITY_OPTIONS: ['Low', 'Medium', 'High', 'Critical'],
+  // Default column widths to prevent data from being cut off
+  COLUMN_WIDTHS: [60, 350, 130, 110, 150, 150, 300, 200, 200],
   BATCH_SIZE: 100, // For quota management
   CACHE_DURATION: 300 // 5 minutes
 };
@@ -59,13 +61,14 @@ function setupSheetStructure(sheet) {
   // Freeze header row
   sheet.setFrozenRows(1);
   
-  // Auto-resize columns
+  // Auto-resize columns for a baseline and then apply fixed widths
   sheet.autoResizeColumns(1, CONFIG.HEADERS.length);
-  
-  // Set optimal column widths
-  sheet.setColumnWidth(2, 300); // Task description
-  sheet.setColumnWidth(7, 250); // Notes
-  sheet.setColumnWidth(8, 150); // Tags
+
+  // Apply configured column widths to keep data visible
+  CONFIG.COLUMN_WIDTHS.forEach((width, index) => {
+    sheet.setColumnWidth(index + 1, width);
+  });
+
 }
 
 /**

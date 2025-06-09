@@ -129,6 +129,11 @@ The spreadsheet uses the following columns:
 | F | Due Date | Date | When the task is due |
 | G | Notes | Text | Additional task notes |
 
+### Column Widths
+
+When the sheet is initialized, the script automatically applies column widths defined in `CONFIG.COLUMN_WIDTHS` (see `TaskManagerCore.js`).
+If any text appears cut off, adjust these widths and re-run `initializeTaskManager()`.
+
 ## Advanced Features
 
 ### Automatic Task Reminders
